@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="id" class="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Videografer Profesional Surabaya | Portofolio & Jasa Video - Mochammad Radith</title>
+
+  <meta name="description" content="Mochammad Radith adalah videografer profesional di Surabaya yang berpengalaman membuat video promosi, event, dokumenter, dan konten storytelling visual." />
+  <meta name="keywords" content="videografer Surabaya, jasa video, portofolio videografer, editing video profesional, dokumenter, video promosi, storyteller visual, Mochammad Radith" />
+  <meta name="author" content="Mochammad Radith" />
+
+  <!-- Canonical & Favicon -->
+  <link rel="canonical" href="https://example.com/" />
+  <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon" />
+
+  <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+  <meta property="og:title" content="Videografer Profesional Surabaya | Portofolio & Jasa Video - Mochammad Radith" />
+  <meta property="og:description" content="Videografer profesional untuk video promosi, event, dan dokumenter dengan hasil sinematik. Lihat portofolio lengkap Mochammad Radith." />
+  <meta property="og:image" content="https://example.com/thumbnail.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://example.com/" />
+  <meta property="og:locale" content="id_ID" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Videografer Profesional Surabaya | Portofolio & Jasa Video - Mochammad Radith" />
+  <meta name="twitter:description" content="Layanan videografi profesional untuk event, promosi, dan dokumenter. Ceritakan kisahmu lewat gambar bergerak." />
+  <meta name="twitter:image" content="https://example.com/thumbnail.jpg" />
+
+  <!-- Schema.org Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mochammad Radith",
+    "url": "https://example.com/",
+    "image": "https://example.com/profile.jpg",
+    "jobTitle": "Videografer Profesional",
+    "description": "Videografer dan storyteller visual yang berfokus pada pembuatan video promosi, dokumenter, dan event dengan storytelling kuat.",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Mochammad Radith Creative"
+    },
+    "sameAs": [
+      "https://instagram.com/namakamu",
+      "https://youtube.com/@namakamu",
+      "https://linkedin.com/in/namakamu"
+    ]
+  }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: 'class' } </script>
+
+  <style>
+    /* layout helpers */
+    .section-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* -----------------------
+       Underline: only desktop (md+) using transform for smoothness
+       Hide underline for colored button and mobile menu
+       ----------------------- */
+    header nav .nav-link { position: relative; transition: color 0.3s; }
+    @media (min-width: 768px) {
+      header nav .nav-link {
+        display: inline-flex;
+        align-items: center;
+      }
+      header nav .nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 100%;
+        height: 2px;
+        background-color: #6366f1;
+        transform: scaleX(0);
+        transform-origin: left center;
+        transition: transform 0.25s ease;
+      }
+      header nav .nav-link:hover::after,
+      header nav .nav-link.active::after {
+        transform: scaleX(1);
+      }
+
+      /* don't show underline for CTA button */
+      header nav .nav-link.bg-indigo-600::after { display: none; }
+    }
+    /* mobile: remove pseudo underline entirely */
+    #mobile-menu .nav-link::after { display: none !important; }
+
+    html, body { margin: 0; padding: 0; height: 100%; overscroll-behavior-y: none; }
+
+    /* background gradient animation */
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    html.dark body{
+      background: linear-gradient(270deg, #273f80, #120622);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+      transition: background 0.6s ease, color 0.4s ease;
+    }
+    html.dark section, html.dark footer { background: transparent !important; }
+
+    /* header look */
+    header { background-color: rgba(255,255,255,0.6); }
+    html.dark header { background-color: rgba(15,23,42,0.6); }
+
+    /* mobile menu transition and visual */
+    #mobile-menu {
+      background-color: rgba(0,0,0,0.72); /* semi dark */
+      backdrop-filter: blur(8px);
+      border-radius: 0 0 1rem 1rem;
+      overflow: hidden;
+      transition: all 0.35s ease;
+      max-height: 0;
+      opacity: 0;
+      transform: translateY(-8px);
+      pointer-events: none;
+    }
+    #mobile-menu.open {
+      max-height: 500px;
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    /* Portfolio slider helpers */
+    #videoSlider {
+      scroll-snap-type: x mandatory;
+      overscroll-behavior-x: contain;
+      scroll-behavior: smooth;
+    }
+    #videoSlider > .slide { scroll-snap-align: start; min-width: 100%; }
+    /* keep buttons above */
+    .slider-button { z-index: 30; }
+
+    /* Responsive tweaks */
+    @media (min-width: 1024px) {
+      /* keep hero video height sensible on large screens */
+      .hero-video { height: 70vh; }
+    }
+
+  </style>
+</head>
+
+<body class="m-0 p-0 h-full overflow-x-hidden bg-gray-50 text-gray-800 dark:text-gray-100 transition-colors duration-500">
+<header role="banner" class="fixed top-0 left-0 w-full z-50 backdrop-blur">
+  <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+    <a href="#home" class="flex items-center nav-link" aria-label="Kembali ke halaman utama">
+      <span class="bg-blue-500 text-white font-bold px-3 py-2 rounded-lg">VG</span>
+      <div class="ml-3">
+        <h1 class="text-white font-semibold">Mochammad Radith</h1>
+        <p class="text-gray-300 text-sm">Videografer & Storyteller</p>
+      </div>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav role="navigation" aria-label="Navigasi utama" class="hidden md:flex space-x-6 text-white font-medium">
+      <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
+      <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
+      <a href="#services" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Layanan</a>
+      <a href="#contact" class="nav-link bg-indigo-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-indigo-700 transition">Hubungi</a>
+    </nav>
+
+    <!-- Mobile Toggle -->
+    <button id="menu-toggle" class="md:hidden text-white focus:outline-none" aria-label="Buka menu navigasi" aria-expanded="false">
+      <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile Nav -->
+  <nav id="mobile-menu" class="md:hidden" aria-label="Menu mobile">
+    <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
+    <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
+    <a href="#services" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Layanan</a>
+    <a href="#contact" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Hubungi</a>
+  </nav>
+</header>
+
+<main id="main-content" class="pt-[70px]">
+  <!-- Hero -->
+  <div class="rounded-2xl overflow-hidden shadow-2xl animate-float">
+    <video 
+      muted loop playsinline autoplay loading="lazy"
+      class="w-full hero-video object-cover"
+      aria-label="Video hero menampilkan layanan videografi"
+      title="Video hero menampilkan layanan videografi"
+      poster="https://example.com/hero-poster.jpg"
+    >
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <section id="home" class="relative h-screen w-full px-6 lg:px-12 grid md:grid-cols-2 gap-10 items-center overflow-hidden pt-20 md:pt-0">
+    <div class="absolute top-0 left-0 w-full h-1/2 -z-10 flex justify-center items-center hero-shape">
+      <div class="w-[1900px] h-[1350px] bg-black/10 dark:bg-black/20 blur-lg rounded-b-[100px]"></div>
+    </div>
+
+    <div class="space-y-6 animate-fadeUp relative z-10">
+      <p class="text-lg md:text-2xl uppercase text-indigo-600 font-bold tracking-widest">Videografer & Editor</p>
+      <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">
+        Menceritakan <span class="text-indigo-600">kisah</span> lewat gambar bergerak
+      </h2>
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl">
+        Saya membuat video yang kuat secara visual dan emosional — liputan event, video promosi, dokumenter singkat, serta konten branded yang berdampak.
+      </p>
+
+      <div class="flex gap-4">
+        <a href="#portfolio" class="inline-flex items-center gap-3 bg-indigo-600 text-white px-6 py-3 rounded-lg shadow hover:scale-[1.02] transition nav-link">Lihat Portofolio</a>
+        <a href="#contact" class="inline-flex items-center gap-3 border border-gray-200 dark:border-gray-600 px-6 py-3 rounded-lg hover:shadow-sm transition nav-link">Pesan Sekarang</a>
+      </div>
+    </div>
+
+    <div class="relative z-10 -translate-y-6 md:-translate-y-8">
+      <div class="absolute -bottom-6 right-6 rounded-xl p-12 border border-gray-100 dark:border-gray-700 overflow-hidden">
+        <img 
+          src="live/DSC00121.JPG" 
+          alt="Latar belakang layanan cepat"
+          loading="lazy"
+          class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110"
+        >
+        <div class="relative z-10 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg p-2">
+          <p class="text-xs text-gray-700 dark:text-gray-300">Layanan cepat & profesional</p>
+          <p class="font-medium text-gray-900 dark:text-white">Ready within 48 hours</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section id="portfolio" class="w-full bg-gray-100 dark:bg-transparent min-h-screen py-16 px-6 lg:px-12 transition-colors duration-500">
+    <h2 class="text-4xl font-bold text-center mb-12">Portofolio Video</h2>
+    <div class="relative w-full">
+      <button id="prevBtn" aria-label="Video sebelumnya" class="slider-button absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-700/80 shadow-lg w-14 h-14 flex items-center justify-center rounded-full hover:scale-110 transition z-10">⬅</button>
+
+      <div id="videoSlider" class="flex gap-8 overflow-hidden w-full">
+        <div class="slide min-w-full snap-start rounded-2xl overflow-hidden shadow-2xl">
+          <video controls loading="lazy" class="w-full h-[600px] object-cover" aria-label="Contoh video portfolio 1" title="Contoh video portfolio 1">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="slide min-w-full snap-start rounded-2xl overflow-hidden shadow-2xl">
+          <video controls loading="lazy" class="w-full h-[600px] object-cover" aria-label="Contoh video portfolio 2" title="Contoh video portfolio 2">
+            <source src="https://www.w3schools.com/html/movie.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+
+      <button id="nextBtn" aria-label="Video berikutnya" class="slider-button absolute right-6 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-700/80 shadow-lg w-14 h-14 flex items-center justify-center rounded-full hover:scale-110 transition z-10">➡</button>
+    </div>
+  </section>
+
+  <section id="about" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+    <div class="max-w-3xl text-center px-6">
+      <h2 class="text-3xl font-bold mb-4">Tentang Saya</h2>
+      <p class="text-gray-600 dark:text-gray-300">Saya Mochammad Radith — videografer & storyteller yang fokus pada pembuatan video promosi, dokumenter, dan liputan event. (Isi dengan pengalaman, peralatan, dan gaya visual Anda.)</p>
+    </div>
+  </section>
+
+  <section id="services" class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800">
+    <div class="max-w-4xl px-6">
+      <h2 class="text-3xl font-bold mb-6 text-center">Layanan</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+          <h3 class="font-semibold mb-2">Video Event</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Liputan event, konferensi, seminar.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+          <h3 class="font-semibold mb-2">Video Promosi</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Iklan produk / company profile.</p>
+        </div>
+        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
+          <h3 class="font-semibold mb-2">Dokumenter Singkat</h3>
+          <p class="text-sm text-gray-600 dark:text-gray-300">Story-driven short documentary.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
+    <div class="max-w-xl w-full px-6">
+      <h2 class="text-3xl font-bold mb-4 text-center">Hubungi Saya</h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-6">Untuk penawaran, tulis pesan atau hubungi via WhatsApp.</p>
+      <div class="space-y-4">
+        <a href="https://wa.me/6285798239587" class="inline-block w-full text-center bg-green-500 text-white px-6 py-3 rounded-lg">Hubungi via WhatsApp</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo" class="mt-12 py-8 bg-white dark:bg-gray-800 border-t dark:border-gray-700 transition-colors duration-500">
+  <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-gray-600 dark:text-gray-400">© <span id="year"></span> Mochammad Radith. All rights reserved.</p>
+    <div class="flex gap-3 text-sm text-gray-500 dark:text-gray-400">
+      <a href="#" aria-label="Instagram">Instagram</a>
+      <a href="#" aria-label="YouTube">YouTube</a>
+      <a href="#" aria-label="LinkedIn">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------------------------
+   Highlight menu aktif
+   Works for desktop+mobile links (nav-link)
+   --------------------------- */
+function setActiveMenu() {
+  const sections = document.querySelectorAll("main section[id]");
+  const navLinksArray = document.querySelectorAll(".nav-link");
+  const header = document.querySelector("header");
+  const scrollPos = window.scrollY + (header ? header.offsetHeight : 0) + 12;
+
+  sections.forEach(section => {
+    const top = section.offsetTop;
+    const bottom = top + section.offsetHeight;
+    navLinksArray.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href === `#${section.id}`) {
+        if (scrollPos >= top && scrollPos < bottom) {
+          link.classList.add("active");
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.classList.remove("active");
+          link.removeAttribute("aria-current");
+        }
+      }
+    });
+  });
+}
+window.addEventListener("scroll", setActiveMenu);
+window.addEventListener("load", setActiveMenu);
+
+/* ---------------------------
+   Mobile menu behavior
+   --------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+  const menuToggle = document.getElementById("menu-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const iconHamburger = document.getElementById("icon-hamburger");
+  const iconClose = document.getElementById("icon-close");
+
+  menuToggle.addEventListener("click", () => {
+    const isOpen = mobileMenu.classList.toggle("open");
+    iconHamburger.classList.toggle("hidden", isOpen);
+    iconClose.classList.toggle("hidden", !isOpen);
+    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
+  });
+
+  // Close mobile menu when clicking a nav link (and smooth scroll)
+  const navLinks = document.querySelectorAll(".nav-link");
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (!target) return;
+      const header = document.querySelector("header");
+      const scrollTo = target.offsetTop - (header ? header.offsetHeight : 0) + 1;
+      window.scrollTo({ top: scrollTo, behavior: "smooth" });
+
+      // close mobile menu if open
+      if (mobileMenu.classList.contains("open")) {
+        mobileMenu.classList.remove("open");
+        iconHamburger.classList.remove("hidden");
+        iconClose.classList.add("hidden");
+        menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // close mobile menu when clicking outside
+  document.addEventListener("click", (e) => {
+    if (!mobileMenu.classList.contains("open")) return;
+    if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+      mobileMenu.classList.remove("open");
+      iconHamburger.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // set copyright year
+  const yearEl = document.getElementById("year");
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+});
+
+/* ---------------------------
+   Video slider prev/next
+   --------------------------- */
+(function sliderInit(){
+  const videoSlider = document.getElementById("videoSlider");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+  if (!videoSlider || !prevBtn || !nextBtn) return;
+
+  function slideWidth() {
+    const slide = videoSlider.querySelector(".slide");
+    if (!slide) return videoSlider.clientWidth;
+    const style = getComputedStyle(videoSlider);
+    const gap = parseFloat(style.gap) || 0;
+    return Math.round(slide.offsetWidth + gap);
+  }
+
+  prevBtn.addEventListener("click", () => {
+    videoSlider.scrollBy({ left: -slideWidth(), behavior: "smooth" });
+  });
+  nextBtn.addEventListener("click", () => {
+    videoSlider.scrollBy({ left: slideWidth(), behavior: "smooth" });
+  });
+
+  // optional: keyboard navigation
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") prevBtn.click();
+    if (e.key === "ArrowRight") nextBtn.click();
+  });
+})();
+
+</script>
+</body>
+</html>
