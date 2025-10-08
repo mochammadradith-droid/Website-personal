@@ -59,9 +59,9 @@
     .section-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
     /* -----------------------
-       Underline: only desktop (md+) using transform for smoothness
-       Hide underline for colored button and mobile menu
-       ----------------------- */
+       NAV UNDERLINE (desktop only)
+       use transform for smoothness; hide for CTA and mobile
+    ----------------------- */
     header nav .nav-link { position: relative; transition: color 0.3s; }
     @media (min-width: 768px) {
       header nav .nav-link {
@@ -84,7 +84,6 @@
       header nav .nav-link.active::after {
         transform: scaleX(1);
       }
-
       /* don't show underline for CTA button */
       header nav .nav-link.bg-indigo-600::after { display: none; }
     }
@@ -107,13 +106,28 @@
     }
     html.dark section, html.dark footer { background: transparent !important; }
 
-    /* header look */
-    header { background-color: rgba(255,255,255,0.6); }
-    html.dark header { background-color: rgba(15,23,42,0.6); }
+    /* === Apple-like blur effect for header === */
+    header {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background-color: rgba(255, 255, 255, 0.15);
+      transition: background-color 0.4s ease, box-shadow 0.4s ease;
+    }
+    html.dark header {
+      background-color: rgba(15, 23, 42, 0.25);
+    }
+    header.scrolled {
+      background-color: rgba(255, 255, 255, 0.7);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    html.dark header.scrolled {
+      background-color: rgba(15, 23, 42, 0.75);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
 
     /* mobile menu transition and visual */
     #mobile-menu {
-      background-color: rgba(0,0,0,0.72); /* semi dark */
+      background-color: rgba(0,0,0,0.72);
       backdrop-filter: blur(8px);
       border-radius: 0 0 1rem 1rem;
       overflow: hidden;
@@ -137,49 +151,46 @@
       scroll-behavior: smooth;
     }
     #videoSlider > .slide { scroll-snap-align: start; min-width: 100%; }
-    /* keep buttons above */
     .slider-button { z-index: 30; }
 
     /* Responsive tweaks */
     @media (min-width: 1024px) {
-      /* keep hero video height sensible on large screens */
       .hero-video { height: 70vh; }
     }
-
   </style>
 </head>
 
 <body class="m-0 p-0 h-full overflow-x-hidden bg-gray-50 text-gray-800 dark:text-gray-100 transition-colors duration-500">
-<header role="banner" class="fixed top-0 left-0 w-full z-50 backdrop-blur">
+<header role="banner" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
   <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <a href="#home" class="flex items-center nav-link" aria-label="Kembali ke halaman utama">
       <span class="bg-blue-500 text-white font-bold px-3 py-2 rounded-lg">VG</span>
       <div class="ml-3">
         <h1 class="text-white font-semibold">Mochammad Radith</h1>
-        <p class="text-gray-300 text-sm">Videografer & Photografer</p>
+        <p class="text-gray-300 text-sm">Videografer & Storyteller</p>
       </div>
     </a>
 
-    <!-- Desktop Nav -->
+    <!-- Navigasi Desktop -->
     <nav role="navigation" aria-label="Navigasi utama" class="hidden md:flex space-x-6 text-white font-medium">
       <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
       <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
       <a href="#services" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Layanan</a>
-      <a href="#contact" class="nav-link bg-indigo-600 px-4 py-2 rounded-lg text-white font-medium hover:bg-indigo-700 transition">Hubungi</a>
+      <a href="#contact" class="nav-link bg-indigo-600 px-4 py-2 rounded-lg block px-6 py-4 text-white font-medium hover:bg-white/10">Hubungi</a>
     </nav>
 
-    <!-- Mobile Toggle -->
+    <!-- Tombol Toggle Mobile -->
     <button id="menu-toggle" class="md:hidden text-white focus:outline-none" aria-label="Buka menu navigasi" aria-expanded="false">
-      <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <!-- Mobile Nav -->
+  <!-- Menu Mobile -->
   <nav id="mobile-menu" class="md:hidden" aria-label="Menu mobile">
     <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
     <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
@@ -314,14 +325,13 @@
 <script>
 /* ---------------------------
    Highlight menu aktif
-   Works for desktop+mobile links (nav-link)
    --------------------------- */
+const sections = document.querySelectorAll("main section[id]");
+const navLinksArray = document.querySelectorAll(".nav-link");
+
 function setActiveMenu() {
-  const sections = document.querySelectorAll("main section[id]");
-  const navLinksArray = document.querySelectorAll(".nav-link");
   const header = document.querySelector("header");
   const scrollPos = window.scrollY + (header ? header.offsetHeight : 0) + 12;
-
   sections.forEach(section => {
     const top = section.offsetTop;
     const bottom = top + section.offsetHeight;
@@ -351,37 +361,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const iconHamburger = document.getElementById("icon-hamburger");
   const iconClose = document.getElementById("icon-close");
 
-  menuToggle.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.toggle("open");
-    iconHamburger.classList.toggle("hidden", isOpen);
-    iconClose.classList.toggle("hidden", !isOpen);
-    menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
-  });
-
-  // Close mobile menu when clicking a nav link (and smooth scroll)
-  const navLinks = document.querySelectorAll(".nav-link");
-  navLinks.forEach(link => {
-    link.addEventListener("click", (e) => {
-      const href = link.getAttribute("href");
-      if (!href || !href.startsWith("#")) return;
-      e.preventDefault();
-      const target = document.querySelector(href);
-      if (!target) return;
-      const header = document.querySelector("header");
-      const scrollTo = target.offsetTop - (header ? header.offsetHeight : 0) + 1;
-      window.scrollTo({ top: scrollTo, behavior: "smooth" });
-
-      // close mobile menu if open
-      if (mobileMenu.classList.contains("open")) {
-        mobileMenu.classList.remove("open");
-        iconHamburger.classList.remove("hidden");
-        iconClose.classList.add("hidden");
-        menuToggle.setAttribute("aria-expanded", "false");
-      }
+  if (menuToggle) {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("open");
+      iconHamburger.classList.toggle("hidden", isOpen);
+      iconClose.classList.toggle("hidden", !isOpen);
+      menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
-  });
+  }
 
-  // close mobile menu when clicking outside
+ const navLinks = document.querySelectorAll(".nav-link");
+navLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    const href = link.getAttribute("href");
+    if (!href || !href.startsWith("#")) return;
+    e.preventDefault();
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    // Perbaikan scroll akurat di Android:
+    const header = document.querySelector("header");
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+    // Gunakan getBoundingClientRect agar akurat di semua device
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight + 2;
+
+    // Scroll dengan halus ke posisi tepat
+    window.scrollTo({ top: targetPosition, behavior: "smooth" });
+
+    // Tutup mobile menu jika terbuka
+    if (mobileMenu.classList.contains("open")) {
+      mobileMenu.classList.remove("open");
+      iconHamburger.classList.remove("hidden");
+      iconClose.classList.add("hidden");
+      menuToggle.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+
+
   document.addEventListener("click", (e) => {
     if (!mobileMenu.classList.contains("open")) return;
     if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
@@ -392,7 +411,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // set copyright year
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
@@ -421,14 +439,24 @@ document.addEventListener("DOMContentLoaded", () => {
     videoSlider.scrollBy({ left: slideWidth(), behavior: "smooth" });
   });
 
-  // optional: keyboard navigation
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") prevBtn.click();
     if (e.key === "ArrowRight") nextBtn.click();
   });
 })();
 
+/* ---------------------------
+   Header scroll blur effect
+   --------------------------- */
+window.addEventListener("scroll", () => {
+  const header = document.querySelector("header");
+  if (!header) return;
+  if (window.scrollY > 20) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
+});
 </script>
 </body>
 </html>
-
