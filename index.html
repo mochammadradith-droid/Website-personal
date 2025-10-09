@@ -55,7 +55,6 @@
   <script> tailwind.config = { darkMode: 'class' } </script>
 
   <style>
-    /* layout helpers */
     .section-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
 
     /* -----------------------
@@ -106,10 +105,10 @@
     }
     html.dark section, html.dark footer { background: transparent !important; }
 
-    /* === Apple-like blur effect for header === */
+    /* === Apple-like blur effect for header (non-intrusive) === */
     header {
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       background-color: rgba(255, 255, 255, 0.15);
       transition: background-color 0.4s ease, box-shadow 0.4s ease;
     }
@@ -149,8 +148,12 @@
       scroll-snap-type: x mandatory;
       overscroll-behavior-x: contain;
       scroll-behavior: smooth;
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
     }
-    #videoSlider > .slide { scroll-snap-align: start; min-width: 100%; }
+    #videoSlider > .slide { scroll-snap-align: start; min-width: 100%; flex: 0 0 100%; }
     .slider-button { z-index: 30; }
 
     /* Responsive tweaks */
@@ -161,7 +164,7 @@
 </head>
 
 <body class="m-0 p-0 h-full overflow-x-hidden bg-gray-50 text-gray-800 dark:text-gray-100 transition-colors duration-500">
-<header role="banner" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+<header role="banner" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 backdrop-blur">
   <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <a href="#home" class="flex items-center nav-link" aria-label="Kembali ke halaman utama">
       <span class="bg-blue-500 text-white font-bold px-3 py-2 rounded-lg">VG</span>
@@ -171,7 +174,6 @@
       </div>
     </a>
 
-    <!-- Navigasi Desktop -->
     <nav role="navigation" aria-label="Navigasi utama" class="hidden md:flex space-x-6 text-white font-medium">
       <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
       <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
@@ -179,19 +181,17 @@
       <a href="#contact" class="nav-link bg-indigo-600 px-4 py-2 rounded-lg block px-6 py-4 text-white font-medium hover:bg-white/10">Hubungi</a>
     </nav>
 
-    <!-- Tombol Toggle Mobile -->
     <button id="menu-toggle" class="md:hidden text-white focus:outline-none" aria-label="Buka menu navigasi" aria-expanded="false">
-      <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-hamburger" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
       </svg>
-      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
   </div>
 
-  <!-- Menu Mobile -->
-  <nav id="mobile-menu" class="md:hidden" aria-label="Menu mobile">
+  <nav id="mobile-menu" class="md:hidden overflow-hidden bg-transparent">
     <a href="#portfolio" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Portofolio</a>
     <a href="#about" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Tentang</a>
     <a href="#services" class="nav-link block px-6 py-4 text-white font-medium hover:bg-white/10">Layanan</a>
@@ -273,42 +273,9 @@
     </div>
   </section>
 
-  <section id="about" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
-    <div class="max-w-3xl text-center px-6">
-      <h2 class="text-3xl font-bold mb-4">Tentang Saya</h2>
-      <p class="text-gray-600 dark:text-gray-300">Saya Mochammad Radith — videografer & storyteller yang fokus pada pembuatan video promosi, dokumenter, dan liputan event. (Isi dengan pengalaman, peralatan, dan gaya visual Anda.)</p>
-    </div>
-  </section>
-
-  <section id="services" class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800">
-    <div class="max-w-4xl px-6">
-      <h2 class="text-3xl font-bold mb-6 text-center">Layanan</h2>
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
-          <h3 class="font-semibold mb-2">Video Event</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Liputan event, konferensi, seminar.</p>
-        </div>
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
-          <h3 class="font-semibold mb-2">Video Promosi</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Iklan produk / company profile.</p>
-        </div>
-        <div class="p-6 bg-white dark:bg-gray-900 rounded-lg shadow">
-          <h3 class="font-semibold mb-2">Dokumenter Singkat</h3>
-          <p class="text-sm text-gray-600 dark:text-gray-300">Story-driven short documentary.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900">
-    <div class="max-w-xl w-full px-6">
-      <h2 class="text-3xl font-bold mb-4 text-center">Hubungi Saya</h2>
-      <p class="text-center text-gray-600 dark:text-gray-300 mb-6">Untuk penawaran, tulis pesan atau hubungi via WhatsApp.</p>
-      <div class="space-y-4">
-        <a href="https://wa.me/6285798239587" class="inline-block w-full text-center bg-green-500 text-white px-6 py-3 rounded-lg">Hubungi via WhatsApp</a>
-      </div>
-    </div>
-  </section>
+  <section id="about" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900"><h2 class="text-3xl font-bold">About Section</h2></section>
+  <section id="services" class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800"><h2 class="text-3xl font-bold">Services Section</h2></section>
+  <section id="contact" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900"><h2 class="text-3xl font-bold">Contact Section</h2></section>
 </main>
 
 <footer role="contentinfo" class="mt-12 py-8 bg-white dark:bg-gray-800 border-t dark:border-gray-700 transition-colors duration-500">
@@ -325,7 +292,7 @@
 <script>
 /* ---------------------------
    Highlight menu aktif
-   --------------------------- */
+--------------------------- */
 const sections = document.querySelectorAll("main section[id]");
 const navLinksArray = document.querySelectorAll(".nav-link");
 
@@ -353,71 +320,83 @@ window.addEventListener("scroll", setActiveMenu);
 window.addEventListener("load", setActiveMenu);
 
 /* ---------------------------
-   Mobile menu behavior
-   --------------------------- */
+   Mobile menu & smooth scroll
+--------------------------- */
 document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.getElementById("menu-toggle");
   const mobileMenu = document.getElementById("mobile-menu");
   const iconHamburger = document.getElementById("icon-hamburger");
   const iconClose = document.getElementById("icon-close");
+  const navLinks = document.querySelectorAll(".nav-link");
 
-  if (menuToggle) {
+  // Toggle menu mobile
+  if (menuToggle && mobileMenu) {
     menuToggle.addEventListener("click", () => {
       const isOpen = mobileMenu.classList.toggle("open");
-      iconHamburger.classList.toggle("hidden", isOpen);
-      iconClose.classList.toggle("hidden", !isOpen);
+      if (iconHamburger) iconHamburger.classList.toggle("hidden", isOpen);
+      if (iconClose) iconClose.classList.toggle("hidden", !isOpen);
       menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
   }
 
- const navLinks = document.querySelectorAll(".nav-link");
-navLinks.forEach(link => {
-  link.addEventListener("click", (e) => {
-    const href = link.getAttribute("href");
-    if (!href || !href.startsWith("#")) return;
-    e.preventDefault();
-
-    const target = document.querySelector(href);
-    if (!target) return;
-
-    // Perbaikan scroll akurat di Android:
-    const header = document.querySelector("header");
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
-
-    // Gunakan getBoundingClientRect agar akurat di semua device
-    const targetPosition = target.getBoundingClientRect().top + window.scrollY - headerHeight + 2;
-
-    // Scroll dengan halus ke posisi tepat
-    window.scrollTo({ top: targetPosition, behavior: "smooth" });
-
-    // Tutup mobile menu jika terbuka
-    if (mobileMenu.classList.contains("open")) {
-      mobileMenu.classList.remove("open");
-      iconHamburger.classList.remove("hidden");
-      iconClose.classList.add("hidden");
-      menuToggle.setAttribute("aria-expanded", "false");
-    }
-  });
-});
-
-
+  // Tutup menu saat klik di luar
   document.addEventListener("click", (e) => {
+    if (!mobileMenu || !menuToggle) return;
     if (!mobileMenu.classList.contains("open")) return;
     if (!mobileMenu.contains(e.target) && !menuToggle.contains(e.target)) {
       mobileMenu.classList.remove("open");
-      iconHamburger.classList.remove("hidden");
-      iconClose.classList.add("hidden");
+      if (iconHamburger) iconHamburger.classList.remove("hidden");
+      if (iconClose) iconClose.classList.add("hidden");
       menuToggle.setAttribute("aria-expanded", "false");
     }
   });
 
+  // fungsi mengukur tinggi header (dinamis)
+  function getHeaderHeight() {
+    const header = document.querySelector("header");
+    if (!header) return 0;
+    const style = window.getComputedStyle(header);
+    const marginBottom = parseFloat(style.marginBottom) || 0;
+    return header.offsetHeight + marginBottom;
+  }
+
+  // Satu handler scroll yang jelas dan tanpa duplikasi
+  navLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      const href = link.getAttribute("href");
+      if (!href || !href.startsWith("#")) return;
+      e.preventDefault();
+
+      const target = document.querySelector(href);
+      if (!target) return;
+
+      // hitung posisi target secara akurat (konsisten di Android / iOS)
+      const headerHeight = getHeaderHeight();
+      let targetPosition = Math.round(target.getBoundingClientRect().top + window.scrollY - headerHeight + 2);
+
+      // Jika Home, pastikan scroll ke paling atas
+      if (href === "#home") targetPosition = 0;
+
+      window.scrollTo({ top: targetPosition, behavior: "smooth" });
+
+      // Tutup mobile menu jika terbuka
+      if (mobileMenu && mobileMenu.classList.contains("open")) {
+        mobileMenu.classList.remove("open");
+        if (iconHamburger) iconHamburger.classList.remove("hidden");
+        if (iconClose) iconClose.classList.add("hidden");
+        if (menuToggle) menuToggle.setAttribute("aria-expanded", "false");
+      }
+    });
+  });
+
+  // Tahun otomatis
   const yearEl = document.getElementById("year");
   if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
 
 /* ---------------------------
    Video slider prev/next
-   --------------------------- */
+--------------------------- */
 (function sliderInit(){
   const videoSlider = document.getElementById("videoSlider");
   const prevBtn = document.getElementById("prevBtn");
@@ -446,16 +425,12 @@ navLinks.forEach(link => {
 })();
 
 /* ---------------------------
-   Header scroll blur effect
-   --------------------------- */
+   Header scroll blur effect (non-intrusive)
+--------------------------- */
 window.addEventListener("scroll", () => {
   const header = document.querySelector("header");
   if (!header) return;
-  if (window.scrollY > 20) {
-    header.classList.add("scrolled");
-  } else {
-    header.classList.remove("scrolled");
-  }
+  header.classList.toggle("scrolled", window.scrollY > 20);
 });
 </script>
 </body>
