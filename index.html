@@ -160,6 +160,41 @@
     @media (min-width: 1024px) {
       .hero-video { height: 70vh; }
     }
+
+    /* Fade up animation for sections on load */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    /* Scroll animation for elements */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    }
+    .animate-on-scroll.animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Staggered delays for services boxes */
+    .animate-on-scroll.animate:nth-child(1) { transition: opacity 0.5s ease-out 0s, transform 0.5s ease-out 0s; }
+    .animate-on-scroll.animate:nth-child(2) { transition: opacity 0.5s ease-out 0.1s, transform 0.5s ease-out 0.1s; }
+    .animate-on-scroll.animate:nth-child(3) { transition: opacity 0.5s ease-out 0.2s, transform 0.5s ease-out 0.2s; }
+    .animate-on-scroll.animate:nth-child(4) { transition: opacity 0.5s ease-out 0.3s, transform 0.5s ease-out 0.3s; }
+    .animate-on-scroll.animate:nth-child(5) { transition: opacity 0.5s ease-out 0.4s, transform 0.5s ease-out 0.4s; }
+    .animate-on-scroll.animate:nth-child(6) { transition: opacity 0.5s ease-out 0.5s, transform 0.5s ease-out 0.5s; }
+    .animate-on-scroll.animate:nth-child(7) { transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s; }
   </style>
 </head>
 
@@ -213,12 +248,12 @@
     </video>
   </div>
 
-  <section id="home" class="relative h-screen w-full px-6 lg:px-12 grid md:grid-cols-2 gap-10 items-center overflow-hidden pt-20 md:pt-0">
+  <section id="home" class="relative h-screen w-full px-6 lg:px-12 grid md:grid-cols-2 gap-10 items-center overflow-hidden pt-20 md:pt-0 fade-up">
     <div class="absolute top-0 left-0 w-full h-1/2 -z-10 flex justify-center items-center hero-shape">
       <div class="w-[1900px] h-[1350px] bg-black/10 dark:bg-black/20 blur-lg rounded-b-[100px]"></div>
     </div>
 
-    <div class="space-y-6 animate-fadeUp relative z-10">
+    <div class="space-y-8 animate-fadeUp relative z-10">
       <p class="text-lg md:text-2xl uppercase text-indigo-600 font-bold tracking-widest">Videografer & Editor</p>
       <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">
         Menceritakan <span class="text-indigo-600">kisah</span> lewat gambar bergerak
@@ -250,7 +285,7 @@
   </section>
 
   <!-- Portfolio -->
-  <section id="portfolio" class="w-full bg-gray-100 dark:bg-transparent min-h-screen py-16 px-6 lg:px-12 transition-colors duration-500">
+  <section id="portfolio" class="w-full bg-gray-100 dark:bg-transparent min-h-screen py-16 px-6 lg:px-12 transition-colors duration-500 fade-up">
     <h2 class="text-4xl font-bold text-center mb-12">Portofolio Video</h2>
     <div class="relative w-full">
       <button id="prevBtn" aria-label="Video sebelumnya" class="slider-button absolute left-6 top-1/2 -translate-y-1/2 bg-white/80 dark:bg-gray-700/80 shadow-lg w-14 h-14 flex items-center justify-center rounded-full hover:scale-110 transition z-10">⬅</button>
@@ -273,8 +308,143 @@
     </div>
   </section>
 
-  <section id="about" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900"><h2 class="text-3xl font-bold">About Section</h2></section>
-  <section id="services" class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-800"><h2 class="text-3xl font-bold">Services Section</h2></section>
+  <section id="about" class="min-h-screen py-16 px-6 lg:px-12 bg-white dark:bg-gray-900 transition-colors duration-500 fade-up">
+    <div class="max-w-6xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <h2 class="text-4xl font-bold text-gray-900 dark:text-white animate-on-scroll">Tentang Saya</h2>
+          <p class="text-gray-600 dark:text-gray-300 animate-on-scroll">
+            Saya Mochammad Radith, seorang videografer profesional yang berbasis di Surabaya. Dengan pengalaman lebih dari 5 tahun, saya telah membantu berbagai klien dari startup hingga perusahaan besar untuk menceritakan kisah mereka melalui visual yang kuat.
+          </p>
+          <p class="text-gray-600 dark:text-gray-300 animate-on-scroll">
+            Passion saya adalah menggabungkan kreativitas dengan teknologi. Selain videografi, saya juga mahir dalam development web dan desain grafis, yang memungkinkan saya untuk memberikan solusi end-to-end untuk kebutuhan branding dan marketing digital.
+          </p>
+          <div class="grid grid-cols-2 gap-4 animate-on-scroll">
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-indigo-600">50+</h3>
+              <p class="text-gray-600 dark:text-gray-300">Proyek Selesai</p>
+            </div>
+            <div class="text-center">
+              <h3 class="text-2xl font-bold text-indigo-600">5+</h3>
+              <p class="text-gray-600 dark:text-gray-300">Tahun Pengalaman</p>
+            </div>
+          </div>
+        </div>
+        <div class="animate-on-scroll">
+          <img
+            src="live/DSC00121.JPG"
+            alt="Foto Mochammad Radith"
+            class="w-full h-96 object-cover rounded-lg shadow-lg"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="services" class="min-h-screen py-16 px-6 lg:px-12 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white">Tools & Software yang Saya Gunakan</h2>
+      <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
+        Berikut adalah tools dan software yang sering saya pakai untuk menciptakan video dan konten visual berkualitas tinggi, mulai dari editing hingga development web.
+      </p>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Adobe Premiere -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-xl">Pr</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe Premiere Pro</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Editing video profesional untuk timeline, cutting, dan assembly footage.
+          </p>
+        </div>
+
+        <!-- After Effects -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-xl">AE</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe After Effects</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Motion graphics, visual effects, dan animasi untuk video dinamis.
+          </p>
+        </div>
+
+        <!-- Canva -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-xl">C</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Canva</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Desain grafis cepat untuk thumbnail, poster, dan elemen visual sederhana.
+          </p>
+        </div>
+
+        <!-- Adobe Illustrator -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-orange-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-xl">Ai</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe Illustrator</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Vektor grafis untuk logo, ikon, dan ilustrasi yang scalable.
+          </p>
+        </div>
+
+        <!-- VSCode -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-blue-800 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-sm">VS</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Visual Studio Code</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Editor kode untuk development web, scripting, dan automation tasks.
+          </p>
+        </div>
+
+        <!-- HTML -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-orange-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-xl"></></span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">HTML</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Struktur dasar untuk website dan konten web interaktif.
+          </p>
+        </div>
+
+        <!-- Tailwind -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-indigo-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-white font-bold text-sm">TW</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Tailwind CSS</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Framework CSS utility-first untuk styling responsif dan cepat.
+          </p>
+        </div>
+
+        <!-- JavaScript -->
+        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <div class="w-16 h-16 bg-yellow-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
+            <span class="text-black font-bold text-xl">JS</span>
+          </div>
+          <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">JavaScript</h3>
+          <p class="text-gray-600 dark:text-gray-300 text-sm">
+            Bahasa pemrograman untuk interaktivitas web, animasi, dan fungsionalitas dinamis.
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center mt-12">
+        <a href="#contact" class="inline-flex items-center gap-3 bg-indigo-600 text-white px-8 py-4 rounded-lg shadow hover:scale-105 transition nav-link">
+          Hubungi untuk Kolaborasi
+        </a>
+      </div>
+    </div>
+  </section>
   <section id="contact" class="min-h-screen flex items-center justify-center bg-white dark:bg-gray-900"><h2 class="text-3xl font-bold">Contact Section</h2></section>
 </main>
 
@@ -290,6 +460,7 @@
 </footer>
 
 <script>
+  
 /* ---------------------------
    Highlight menu aktif
 --------------------------- */
@@ -432,6 +603,23 @@ window.addEventListener("scroll", () => {
   if (!header) return;
   header.classList.toggle("scrolled", window.scrollY > 20);
 });
+
+/* ---------------------------
+   Scroll Animations
+--------------------------- */
+function animateOnScroll() {
+  const elements = document.querySelectorAll('.animate-on-scroll');
+  elements.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const windowHeight = window.innerHeight;
+    if (elementTop < windowHeight - 100) {
+      element.classList.add('animate');
+    }
+  });
+}
+
+window.addEventListener('scroll', animateOnScroll);
+window.addEventListener('load', animateOnScroll);
 </script>
 </body>
 </html>
