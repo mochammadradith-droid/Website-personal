@@ -1,4 +1,4 @@
-<!doctype html>
+u<!doctype html>
 <html lang="id" class="dark">
 <head>
   <meta charset="utf-8" />
@@ -89,7 +89,7 @@
     /* mobile: remove pseudo underline entirely */
     #mobile-menu .nav-link::after { display: none !important; }
 
-    html, body { margin: 0; padding: 0; height: 100%; overscroll-behavior-y: none; }
+     html, body { margin: 0; padding: 0; height: 100%; overscroll-behavior-y: none; }
 
     /* background gradient animation */
     @keyframes gradientShift {
@@ -124,6 +124,14 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
 
+    /* Reduce blur intensity on mobile for better performance */
+    @media (max-width: 767px) {
+      header {
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+      }
+    }
+
     /* mobile menu transition and visual */
     #mobile-menu {
       background-color: rgba(0,0,0,0.72);
@@ -141,6 +149,14 @@
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
+    }
+
+    /* Efek fade-out halus saat menu ditutup */
+    #mobile-menu.closing {
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
     }
 
     /* Portfolio slider helpers */
@@ -195,10 +211,71 @@
     .animate-on-scroll.animate:nth-child(5) { transition: opacity 0.5s ease-out 0.4s, transform 0.5s ease-out 0.4s; }
     .animate-on-scroll.animate:nth-child(6) { transition: opacity 0.5s ease-out 0.5s, transform 0.5s ease-out 0.5s; }
     .animate-on-scroll.animate:nth-child(7) { transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.6s; }
+    .animate-on-scroll.animate:nth-child(8) { transition: opacity 0.5s ease-out 0.6s, transform 0.5s ease-out 0.7s; }
+
+    /* Hero animations */
+    .animate-slide-in-left {
+      opacity: 0;
+      transform: translateX(-100%);
+      animation: slideInLeft 1s ease-out forwards;
+    }
+    .animate-fade-in {
+      opacity: 0;
+      animation: fadeIn 1.5s ease-out 0.5s forwards;
+    }
+    @keyframes slideInLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Subtle hover parallax for hero */
+    .hero-container {
+      transition: transform 0.3s ease;
+    }
+    .hero-container:hover {
+      transform: translateY(-5px) scale(1.01);
+    }
+
+    /* Back to top button */
+    #back-to-top {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    #back-to-top.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Glassmorphism for services cards */
+    #services .grid > div {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: background-color 0.4s ease, transform 0.3s ease;
+    }
+    #services .grid > div:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      transform: scale(1.02);
+    }
+    html.dark #services .grid > div {
+      background-color: rgba(15, 23, 42, 0.25);
+    }
+    html.dark #services .grid > div:hover {
+      background-color: rgba(15, 23, 42, 0.35);
+    }
   </style>
 </head>
 
-<body class="m-0 p-0 h-full overflow-x-hidden bg-gray-50 text-gray-800 dark:text-gray-100 transition-colors duration-500">
+<body class="m-0 p-0 h-full overflow-x-hidden text-gray-800 dark:text-gray-100 transition-colors duration-500">
 <header role="banner" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 backdrop-blur">
   <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
     <a href="#home" class="flex items-center nav-link" aria-label="Kembali ke halaman utama">
@@ -236,8 +313,8 @@
 
 <main id="main-content" class="pt-[70px]">
   <!-- Hero -->
-  <div class="rounded-2xl overflow-hidden shadow-2xl animate-float">
-    <video 
+  <div class="rounded-2xl overflow-hidden shadow-2xl animate-float hero-container">
+    <video
       muted loop playsinline autoplay loading="lazy"
       class="w-full hero-video object-cover"
       aria-label="Video hero menampilkan layanan videografi"
@@ -254,12 +331,12 @@
     </div>
 
     <div class="space-y-8 animate-fadeUp relative z-10">
-      <p class="text-lg md:text-2xl uppercase text-indigo-600 font-bold tracking-widest">Videografer & Editor</p>
-      <h2 class="text-4xl md:text-6xl font-extrabold leading-tight">
-        Menceritakan <span class="text-indigo-600">kisah</span> lewat gambar bergerak
+      <p class="text-lg md:text-2xl uppercase text-indigo-600 font-bold tracking-widest">Motion Graphics Specialist</p>
+      <h2 class="text-4xl md:text-6xl font-extrabold leading-tight animate-slide-in-left">
+        Membuat <span class="text-indigo-600">motion graphics</span> yang menakjubkan
       </h2>
-      <p class="text-gray-600 dark:text-gray-300 max-w-2xl">
-        Saya membuat video yang kuat secara visual dan emosional — liputan event, video promosi, dokumenter singkat, serta konten branded yang berdampak.
+      <p class="text-gray-600 dark:text-gray-300 max-w-2xl animate-fade-in">
+        Saya spesialis dalam motion graphics yang memukau — animasi dinamis, visual effects, dan konten interaktif yang membuat brand Anda menonjol dan berdampak.
       </p>
 
       <div class="flex gap-4">
@@ -269,19 +346,27 @@
     </div>
 
     <div class="relative z-10 -translate-y-6 md:-translate-y-8">
-      <div class="absolute -bottom-6 right-6 rounded-xl p-12 border border-gray-100 dark:border-gray-700 overflow-hidden">
-        <img 
-          src="live/DSC00121.JPG" 
-          alt="Latar belakang layanan cepat"
-          loading="lazy"
-          class="absolute inset-0 w-full h-full object-cover opacity-80 scale-110"
-        >
-        <div class="relative z-10 bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-lg p-2">
-          <p class="text-xs text-gray-700 dark:text-gray-300">Layanan cepat & profesional</p>
-          <p class="font-medium text-gray-900 dark:text-white">Ready within 48 hours</p>
+        <div class="relative w-full h-64 bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-xl overflow-hidden">
+          <video
+            controls
+            muted
+            loop
+            playsinline
+            autoplay
+            loading="lazy"
+            class="w-full h-full object-cover rounded-xl"
+            aria-label="Contoh video portofolio singkat"
+            title="Contoh video portofolio singkat"
+          >
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="absolute bottom-4 left-4 right-4 bg-black/50 backdrop-blur-sm rounded-lg p-3">
+            <p class="text-white text-sm font-semibold">Portofolio Singkat</p>
+            <p class="text-gray-300 text-xs">Lihat kualitas hasil kerja saya</p>
+          </div>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- Portfolio -->
@@ -332,9 +417,9 @@
         </div>
         <div class="animate-on-scroll">
           <img
-            src="live/DSC00121.JPG"
+            src="live/DSC00121.png"
             alt="Foto Mochammad Radith"
-            class="w-full h-96 object-cover rounded-lg shadow-lg"
+            class="w-full h-94 object-cover rounded-lg shadow-lg"
             loading="lazy"
           >
         </div>
@@ -343,17 +428,15 @@
   </section>
   <section id="services" class="min-h-screen py-16 px-6 lg:px-12 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
     <div class="max-w-6xl mx-auto">
-      <h2 class="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white">Tools & Software yang Saya Gunakan</h2>
+      <h2 class="text-4xl font-bold text-center mb-8 text-gray-900 dark:text-white">Motion Graphics Tools & Software</h2>
       <p class="text-center text-gray-600 dark:text-gray-300 mb-12 max-w-2xl mx-auto">
-        Berikut adalah tools dan software yang sering saya pakai untuk menciptakan video dan konten visual berkualitas tinggi, mulai dari editing hingga development web.
+        Berikut adalah tools dan software yang sering saya pakai untuk menciptakan motion graphics yang menakjubkan, mulai dari animasi hingga visual effects.
       </p>
 
       <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
         <!-- Adobe Premiere -->
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-red-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-xl">Pr</span>
-          </div>
+        <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <img src="live/adobe priemier logo.png" alt="Adobe Premiere Pro Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe Premiere Pro</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Editing video profesional untuk timeline, cutting, dan assembly footage.
@@ -361,10 +444,8 @@
         </div>
 
         <!-- After Effects -->
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-blue-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-xl">AE</span>
-          </div>
+        <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <img src="live/AE.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe After Effects</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Motion graphics, visual effects, dan animasi untuk video dinamis.
@@ -372,10 +453,8 @@
         </div>
 
         <!-- Canva -->
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-purple-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-xl">C</span>
-          </div>
+        <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <img src="live/canva.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Canva</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Desain grafis cepat untuk thumbnail, poster, dan elemen visual sederhana.
@@ -383,10 +462,8 @@
         </div>
 
         <!-- Adobe Illustrator -->
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-orange-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-xl">Ai</span>
-          </div>
+        <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+          <img src="live/AI.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Adobe Illustrator</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Vektor grafis untuk logo, ikon, dan ilustrasi yang scalable.
@@ -394,10 +471,8 @@
         </div>
 
         <!-- VSCode -->
-        <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-blue-800 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-sm">VS</span>
-          </div>
+        <div class="rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
+         <img src="live/vscode.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Visual Studio Code</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Editor kode untuk development web, scripting, dan automation tasks.
@@ -406,9 +481,7 @@
 
         <!-- HTML -->
         <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-orange-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-xl"></></span>
-          </div>
+            <img src="live/html.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">HTML</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Struktur dasar untuk website dan konten web interaktif.
@@ -417,9 +490,7 @@
 
         <!-- Tailwind -->
         <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-indigo-600 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-white font-bold text-sm">TW</span>
-          </div>
+         <img src="live/tailwind.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">Tailwind CSS</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Framework CSS utility-first untuk styling responsif dan cepat.
@@ -428,9 +499,7 @@
 
         <!-- JavaScript -->
         <div class="bg-white dark:bg-gray-700 rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow text-center animate-on-scroll">
-          <div class="w-16 h-16 bg-yellow-500 rounded-lg flex items-center justify-center mb-4 mx-auto">
-            <span class="text-black font-bold text-xl">JS</span>
-          </div>
+          <img src="live/javasript.png" alt="Adobe After Effects Logo" class="w-16 h-16 rounded-lg mb-4 mx-auto object-contain">
           <h3 class="text-xl font-semibold mb-2 text-gray-900 dark:text-white">JavaScript</h3>
           <p class="text-gray-600 dark:text-gray-300 text-sm">
             Bahasa pemrograman untuk interaktivitas web, animasi, dan fungsionalitas dinamis.
@@ -458,6 +527,13 @@
     </div>
   </div>
 </footer>
+
+<!-- Back to Top Button -->
+<button id="back-to-top" class="fixed bottom-8 right-8 bg-indigo-600 text-white p-3 rounded-full shadow-lg hover:bg-indigo-700 transition-colors z-50" aria-label="Kembali ke atas">
+  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+  </svg>
+</button>
 
 <script>
   
@@ -508,6 +584,16 @@ document.addEventListener("DOMContentLoaded", () => {
       if (iconClose) iconClose.classList.toggle("hidden", !isOpen);
       menuToggle.setAttribute("aria-expanded", isOpen ? "true" : "false");
     });
+  }
+
+   // Fungsi untuk menutup menu dengan delay fade-out
+  function closeMenu() {
+    if (!mobileMenu.classList.contains("open")) return;
+    mobileMenu.classList.remove("open");
+    mobileMenu.classList.add("closing");
+    setTimeout(() => {
+      mobileMenu.classList.remove("closing");
+    }, 300); // durasi fade-out 0.3 detik
   }
 
   // Tutup menu saat klik di luar
@@ -620,6 +706,31 @@ function animateOnScroll() {
 
 window.addEventListener('scroll', animateOnScroll);
 window.addEventListener('load', animateOnScroll);
+
+/* ---------------------------
+   Back to Top Button
+--------------------------- */
+(function backToTopInit() {
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (!backToTopBtn) return;
+
+  // Show/hide button based on scroll position
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) { // Show after scrolling 300px
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+  });
+
+  // Scroll to top when clicked
+  backToTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+})();
 </script>
-</body>
-</html>
+ </body>
+ </html>
